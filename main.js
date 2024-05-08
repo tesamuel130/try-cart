@@ -46,8 +46,39 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateCartItemList() {
       cartItemsList.innerHTML = "";
       cartItems.forEach((item, index) => {
-        const cartItem = document.createElement("div");
+        const cartItem = document.createElement(`div`);
+        cartItem.classList.add("cart-item", "individual-cart-item");
+        cartItem.innerHTML = `
+          <span> (${item.quantity}x)${item.name} </span>
+          <span class="cart-item-price"> $${(
+            item.price * item.quantity
+          ).toFixed(2)} 
+          <button class="remove-btn" data-index="${index}"><i class="fa-solid fa-times"></i></button>
+          </span>
+        `;
+
+        cartItemsList.append(cartItem);
+      });
+
+      const removeButtons = document.querySelectorAll(".remove-item");
+      removeButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          const index = event.target.dataset.index;
+          removeItemFromCart(index);
+        });
       });
     }
+
+    function removeItemFromCart(index) {
+      const removeItem = cartItems.splice(index, 1)[0];
+      totalAmount -= removeItem.price * removeItem.quantity;
+      updateCartUI;
+    }
+
+    function updateCartTotal() {
+      cartTotal.textContent = `$${totalAmount.toFixed(2)}`;
+    }
+
+    cartIcon.addEventListener("click");
   });
 });
