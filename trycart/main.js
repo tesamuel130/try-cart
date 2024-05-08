@@ -1,36 +1,54 @@
-var addItemId = 0
-
-function addtocart(item){
-    addItemId += 1;
-
-    //create a div for the card item
-    var selectItem = document.createElement("div")
-    selectItem.classList.add('cartimg');
-    selectItem.setAttribute('id', addItemId)
-
-    //create an img element
-    var img = document.createElement('img')
-    img.setAttribute('src', item.children[0].currentSrc)
-
-    // Create a div element for the title and set its text content
-    var title = document.createElement('div')
-    title.innerText = item.children[1].innerText;
-
-    // Create a div element for the label and set its text content
-    var lable = document.createElement('div')
-    lable.innerText = item.children[2].children[0].innerText;
-
-    // Create a span element for the select value
-    var select = document.createElement('span')
-    select.innerText = item.children[2].children[1].value;
-
-
-    lable.append(select)
-    
-    var cartItems = document.getElementById('title');
-    selectItem.append(img)
-    selectItem.append(title)
-    selectItem.append(lable)
-    cartItems.append(selectItem);
-
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+    const cartItemCount = document.querySelector(".cart-icon span");
+    const cartItemsList = document.querySelectorAll(".cart-items");
+    const cartTotal = document.querySelectorAll(".cart-total");
+    const cartIcon = document.querySelectorAll(".cart-icon");
+    const sidebar = document.getElementById("sidebar");
+  
+    let cartItems = [];
+    let totalAmount = 0;
+  
+    addToCartButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const item = {
+          name: document.querySelectorAll(".cart .cart-title")[index].textContent,
+          price: parseFloat(
+            document.querySelectorAll(".price")[index].textContent.slice(1)
+          ),
+          quantity: 1,
+        };
+  
+        const existingItem = cartItems.find(
+          (cartItem) => cartItem.name === item.name
+        );
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cartItems.push(item);
+        }
+  
+        totalAmount += item.price;
+  
+        updateCartUI();
+      });
+  
+      function updateCartUI() {
+        updateCartItemsCount(cartItems.length);
+        updateCartItemList();
+        updateCartTotal();
+      }
+  
+      function updateCartItemsCount(count) {
+        cartItemsList.textContent = count;
+      }
+  
+      function updateCartItemList() {
+        cartItemsList.innerHTML = "";
+        cartItems.forEach((item, index) => {
+          const cartItem = document.createElement("div");
+        });
+      }
+    });
+  });
+  
