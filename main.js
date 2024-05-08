@@ -79,6 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
       cartTotal.textContent = `$${totalAmount.toFixed(2)}`;
     }
 
-    cartIcon.addEventListener("click");
+    cartIcon.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+    });
+
+    const closeButton = document.querySelector(".sidebar-close");
+    closeButton.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+    });
   });
 });
