@@ -219,7 +219,7 @@ body{
     border-bottom-left-radius: 20px;
 }
 
-.sidebar .open{
+.sidebar.open{
     right: 0;
 }
 
