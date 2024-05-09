@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartItemsList = document.querySelector(".cart-items");
   const cartTotal = document.querySelector(".cart-total");
   const cartIcon = document.querySelector(".cart-icons");
-  const sidebar = document.getElementById("sidebar"); // Removed the dot prefix
+  const sidebar = document.getElementById("sidebar");
 
   let cartItems = [];
   let totalAmount = 0;
@@ -47,7 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function updateCartUI() {
-    updateCartItemsCount(cartItems.length);
+    const cartItemLength = cartItems.reduce(
+      (total, currentItem) => total + currentItem.quantity,
+      0
+    );
+    updateCartItemsCount(cartItemLength);
     updateCartItemList();
     updateCartTotal();
   }

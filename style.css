@@ -237,7 +237,7 @@ body{
     margin-top: 1rem;
 }
 
-.cart-tems{
+.individual-cart-item{
     display: flex;
     justify-content: space-between;
     padding: 10px 5px;
