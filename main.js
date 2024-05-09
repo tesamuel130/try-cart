@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   const addToCartButtons = document.querySelectorAll(".add-to-cart");
   const cartItemCount = document.querySelector(".cart-icon span");
-  const cartItemsList = document.querySelectorAll(".cart-items");
-  const cartTotal = document.querySelectorAll(".cart-total");
-  const cartIcon = document.querySelectorAll(".cart-icon");
-  const sidebar = document.getElementById("sidebar");
+  const cartItemsList = document.querySelector(".cart-items");
+  const cartTotal = document.querySelector(".cart-total");
+  const cartIcon = document.querySelector(".cart-icons");
+  const sidebar = document.getElementById(".sidebar");
 
   let cartItems = [];
   let totalAmount = 0;
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function removeItemFromCart(index) {
       const removeItem = cartItems.splice(index, 1)[0];
       totalAmount -= removeItem.price * removeItem.quantity;
-      updateCartUI;
+      updateCartUI();
     }
 
     function updateCartTotal() {
